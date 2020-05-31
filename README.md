@@ -27,3 +27,20 @@ L3=tf.nn.softplus(tf.matmul(L2, W3) + B3)
 Se define la función costo y el optimizador el cual funciona utilizando Gradiente Descendiente. Se utiliza un ciclo de 100,000 pasos dentro del cual cada cierto paso y bajo ciertas condiciones se actualiza el radio de aprendizaje, reduciendo así la función costo, por último, se guardan los pesos y las ordenadas al origen en formato CSV.
 # Solución
 En este archivo se llaman los pesos y las ordenadas al origen, luego, con las funciones definidas en el algoritmo <code>GeneradorPotencial</code>  generamos 3 potenciales para poner a prueba el programa, activamos las 2 capas ocultas y las de salida utilizando como entrada uno de los 3 potenciales que se generan, se obtiene una solución predicha por TensorFlow y utilizando métodos convencionales se obtienen de igual forma la solución, con el módulo matplotlib se grafica tanto los potenciales como la solución por métodos convencionales y la solución utilizando TensorFlow y por ultimo se calcula el error porcentual promedio entre los puntos de la solución dada por TensorFlow.
+<pre><code>p=2#Número de potencial que queremos analizar, este va del 0-2 
+predicted=sess.run(L3,feed_dict={X: [potentials[p]]})[0]#Aquí se predice la solución
+#En las siguientes líneas hacemos la gráfica de los potenciales 
+plt.plot(predicted)
+plt.plot([potentials[p][i]/max(potentials[p]) for i in range(bins - 1)])
+plt.plot(wavefuncs[p])
+plt.legend(["Predicted solution","Potential","Real Solution"])
+plt.xlabel("x")
+plt.ylabel("Energy")
+plt.show()
+#Calculo del error promedio portentual 
+error=0
+for i in range(127):
+    error+=abs((predicted[i]-wavefuncs[p][i])/wavefuncs[p][i])*100
+error=error/128
+print(error)
+</code></pre>
