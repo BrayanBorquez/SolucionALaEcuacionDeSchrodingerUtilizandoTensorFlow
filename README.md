@@ -9,21 +9,20 @@ Dentro del cuerpo del algoritmo se definen constantes y arreglos los cuales sirv
 El algoritmo anterior se repite cambiando la semilla aleatoria dependiendo de la cantidad de potenciales que se quieran utilizar para entrenar al programa.
 # Schrödinger 
 El algoritmo <code>Schrödinger</code> lee los potenciales del total de semillas utilizadas, se define una constante igual a la cantidad de semillas que se leerán, por cuestiones de pruebas el algoritmo muestra 3, pero esta cantidad es muy pequeña y para obtener un buen programa es recomendable tomar más, una vez hecho esto se generan las constantes de TensorFlow como la constante de aprendizaje y la que actualizará esta constante de aprendizaje, se define una semilla aleatoria la cual puede darse cualquier valor, se define ahora dos capas ocultas y una de salida, para estas capas se definen los pesos y las ordenadas al origen. 
-<code>
-  X=tf.placeholder(tf.float32)
-  Y=tf.placeholder(tf.float32)
-  #Primera capa oculta
-  W1=tf.Variable(tf.random_uniform([bins-1, bins-1], -1/bins, 1/bins))
-  B1=tf.Variable(tf.random_uniform([bins-1], -1, 1))
-  L1=tf.nn.softplus(tf.matmul(X, W1) + B1)
-  #Segunda capa oculta
-  W2=tf.Variable(tf.random_uniform([bins-1, bins-1], -1./bins, 1./bins))
-  B2=tf.Variable(tf.random_uniform([bins-1], -1., 1.))
-  L2=tf.nn.softplus(tf.matmul(L1, W2) + B2)
-  #Capa de salida
-  W3=tf.Variable(tf.random_uniform([bins-1, bins-1], -1./bins, 1./bins))
-  B3=tf.Variable(tf.random_uniform([bins-1], -1., 1.))
-  L3=tf.nn.softplus(tf.matmul(L2, W3) + B3)
+<code> X=tf.placeholder(tf.float32)
+Y=tf.placeholder(tf.float32)
+#Primera capa oculta
+W1=tf.Variable(tf.random_uniform([bins-1, bins-1], -1/bins, 1/bins))
+B1=tf.Variable(tf.random_uniform([bins-1], -1, 1))
+L1=tf.nn.softplus(tf.matmul(X, W1) + B1)
+#Segunda capa oculta
+W2=tf.Variable(tf.random_uniform([bins-1, bins-1], -1./bins, 1./bins))
+B2=tf.Variable(tf.random_uniform([bins-1], -1., 1.))
+L2=tf.nn.softplus(tf.matmul(L1, W2) + B2)
+#Capa de salida
+W3=tf.Variable(tf.random_uniform([bins-1, bins-1], -1./bins, 1./bins))
+B3=tf.Variable(tf.random_uniform([bins-1], -1., 1.))
+L3=tf.nn.softplus(tf.matmul(L2, W3) + B3)
 </code>
 Se define la función costo y el optimizador el cual funciona utilizando Gradiente Descendiente. Se utiliza un ciclo de 100,000 pasos dentro del cual cada cierto paso y bajo ciertas condiciones se actualiza el radio de aprendizaje, reduciendo así la función costo, por último, se guardan los pesos y las ordenadas al origen en formato CSV.
 # Solución
