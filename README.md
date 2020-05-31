@@ -9,7 +9,7 @@ Dentro del cuerpo del algoritmo se definen constantes y arreglos los cuales sirv
 El algoritmo anterior se repite cambiando la semilla aleatoria dependiendo de la cantidad de potenciales que se quieran utilizar para entrenar al programa.
 # Schrödinger 
 El algoritmo <code>Schrödinger</code> lee los potenciales del total de semillas utilizadas, se define una constante igual a la cantidad de semillas que se leerán, por cuestiones de pruebas el algoritmo muestra 3, pero esta cantidad es muy pequeña y para obtener un buen programa es recomendable tomar más, una vez hecho esto se generan las constantes de TensorFlow como la constante de aprendizaje y la que actualizará esta constante de aprendizaje, se define una semilla aleatoria la cual puede darse cualquier valor, se define ahora dos capas ocultas y una de salida, para estas capas se definen los pesos y las ordenadas al origen. 
-<pre><code> X=tf.placeholder(tf.float32)
+<pre><code>X=tf.placeholder(tf.float32)
 Y=tf.placeholder(tf.float32)
 #Primera capa oculta
 W1=tf.Variable(tf.random_uniform([bins-1, bins-1], -1/bins, 1/bins))
